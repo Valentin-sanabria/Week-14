@@ -4,14 +4,31 @@ describe('My Login application', () => {
     beforeAll('Open webpage with url', () => {
         browser.url("https://www.saucedemo.com/")
     })
-   /* it('should login with valid credentials', async () => {
-        await LoginPage.open();
 
-        await LoginPage.login('tomsmith', 'SuperSecretPassword!');
-        await expect(SecurePage.flashAlert).toBeExisting();
-        await expect(SecurePage.flashAlert).toHaveTextContaining(
-            'You logged into a secure area!');
-    }); */
+    it('Try to log in with incorrect information',  async () => {
+        await LoginPage.login('TestingQA','wrongPassword');
+        await LoginPage.errorMsg.isDisplayed();
+        await LoginPage.errorMsg.toHaveTextContaining('Epic sadface: Username and password do not match any user in this service');
+        await LoginPage.closeErrorBtn.click();
+    })
+
+    it('Try to log in with empty username',  async () => {
+        await LoginPage.login('','secret_sauce');
+        await LoginPage.errorMsg.isDisplayed();
+        await LoginPage.errorMsg.toHaveTextContaining('Epic sadface: Username is required');
+        await LoginPage.closeErrorBtn.click();
+    })
+
+    it('Try to log in with empty password',  async () => {
+        await LoginPage.login('valen','');
+        await LoginPage.errorMsg.isDisplayed();
+        await LoginPage.errorMsg.toHaveTextContaining('Epic sadface: Password is required');
+        await LoginPage.closeErrorBtn.click();
+    })
+
+    it('Log in with standard_user',  async () => {
+        await LoginPage.login('standard_user','secret_sauce');
+    })
 
     it('Log in with standard_user',  async () => {
         await LoginPage.login('standard_user','secret_sauce');
