@@ -21,8 +21,8 @@ class LoginPage {
     }
 
     get errorMsg () {
-        return $('#login_button_container > div > form > div.error-message-container.error');
-    }
+        return $('#login_button_container > div > form > div.error-message-container.error > h3');
+        }
 
     get closeErrorBtn () {
         return $('#login_button_container > div > form > div.error-message-container.error > h3 > button');

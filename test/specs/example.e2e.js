@@ -1,33 +1,32 @@
 import LoginPage from  '../pageobjects/login.page';
 
-describe('My Login application', () => {
+describe('Testing Login screenflow: ', () => {
     beforeAll('Open webpage with url', () => {
         browser.url("https://www.saucedemo.com/")
-    })
-
-    it('Try to log in with incorrect information',  async () => {
-        await LoginPage.login('TestingQA','wrongPassword');
-        await LoginPage.errorMsg.isDisplayed();
-        await LoginPage.errorMsg.toHaveTextContaining('Epic sadface: Username and password do not match any user in this service');
-        await LoginPage.closeErrorBtn.click();
-    })
-
-    it('Try to log in with empty username',  async () => {
-        await LoginPage.login('','secret_sauce');
-        await LoginPage.errorMsg.isDisplayed();
-        await LoginPage.errorMsg.toHaveTextContaining('Epic sadface: Username is required');
-        await LoginPage.closeErrorBtn.click();
     })
 
     it('Try to log in with empty password',  async () => {
         await LoginPage.login('valen','');
         await LoginPage.errorMsg.isDisplayed();
-        await LoginPage.errorMsg.toHaveTextContaining('Epic sadface: Password is required');
+        await expect(LoginPage.errorMsg).toHaveTextContaining('Epic sadface: Password is required');
         await LoginPage.closeErrorBtn.click();
+        await browser.refresh();
     })
 
-    it('Log in with standard_user',  async () => {
-        await LoginPage.login('standard_user','secret_sauce');
+    it('Try to log in with empty username',  async () => {
+        await LoginPage.login('','secret_sauce');
+        await LoginPage.errorMsg.isDisplayed();
+        await expect(LoginPage.errorMsg).toHaveTextContaining('Epic sadface: Username is required');
+        await LoginPage.closeErrorBtn.click();
+        await browser.refresh();
+    })
+
+    it('Try to log in with incorrect information',  async () => {
+        await LoginPage.login('TestingQA','wrongPassword');
+        await LoginPage.errorMsg.isDisplayed();
+        await expect(LoginPage.errorMsg).toHaveTextContaining('Epic sadface: Username and password do not match any user in this service');
+        await LoginPage.closeErrorBtn.click();
+        await browser.refresh();
     })
 
     it('Log in with standard_user',  async () => {
