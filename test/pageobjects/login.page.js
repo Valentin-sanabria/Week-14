@@ -12,20 +12,24 @@ class LoginPage {
         return $('#login-button');
     }
 
-    get sideBarBurger () {
-        return $('#react-burger-menu-btn');
-    }
-
-    get logoutBtn () {
-        return $('#logout_sidebar_link');
-    }
-
     get errorMsg () {
         return $('#login_button_container > div > form > div.error-message-container.error > h3');
-        }
+    }
+
+    get errorCrossImg () {
+        return $('#login_button_container > div > form > div:nth-child(1) > svg > path');
+    }
 
     get closeErrorBtn () {
         return $('#login_button_container > div > form > div.error-message-container.error > h3 > button');
+    }
+
+    get loginCredentials () {
+        return $('#login_credentials');
+    }
+
+    get robotImg () {
+        return $('#root > div > div.login_wrapper > div.login_wrapper-inner > div.bot_column');
     }
 
     async login (username, password) {
