@@ -32,6 +32,10 @@ class LoginPage {
         return $('#root > div > div.login_wrapper > div.login_wrapper-inner > div.bot_column');
     }
 
+    get footerRobotImg() {
+        return $('#page_wrapper > footer > img');
+    }
+
     async login (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
